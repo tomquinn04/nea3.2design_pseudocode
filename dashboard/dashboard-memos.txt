@@ -1,0 +1,19 @@
+SUBROUTINE - Dashboard: Memos & Announcements
+(c) TOM QUINN 2022
+
+ON LOAD DO
+    SORT Memos BY Date DESCENDING
+    FOR EACH Memo IN Memos DO
+        NEW TableRow WITH Memo // create a row in the memos form table with the memo Value
+    END FOR EACH
+        
+
+ON CLICK BtnNew DO
+    OPEN FORM NewMemo AS POPUP
+
+ON CLICK BtnSaveMemo DO
+    Database.Commit(Memo.New(txtMemoText, currentUser, DateTime.Now(YYYYMMDD)))
+    CLOSE FORM NewMemo
+
+    // Database.Commit will likely be a Class Method which validates the input
+
