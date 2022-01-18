@@ -1,3 +1,22 @@
 SUBROUTINE - Dashboard: Statistics Report Boxes
 (c) TOM QUINN 2022
 
+FUNCTION CalculateSalesTotalThisMonth
+    decimal total
+    recordList = SQL(
+        SELECT productID, stockAdjustment
+        FROM tblTransactions
+        WHERE stockAdjustment < 0 and transactionDate < Today - 31d; // select sales transactions in the past 30 days
+    )
+
+    FOR EACH sale IN recordList DO
+        productPrice = SQL(
+            SELECT productSalePrice
+            FROM tblProducts
+            WHERE productID == sale.productID;
+        )
+        total += productPrice * sale.stockAdjustment
+    END FOR EACH
+END FUNCTION
+
+// the rest of the functions for statistics will be very similar to this one
