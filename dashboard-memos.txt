@@ -1,0 +1,9 @@
+SUBROUTINE - Dashboard: Memos & Announcements
+
+ON LOAD DO
+    SORT Memos BY DATE DESCENDING
+    FOR EACH Memo IN Memos DO
+        
+
+ON CLICK BtnNew DO
+

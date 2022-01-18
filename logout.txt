@@ -1,0 +1,7 @@
+SUBROUTINE - LOGOUT BUTTON
+
+GLOBAL CurrentUser = Null
+CLOSE ALL FORMS
+LOAD LoginForm
+
+// Add function to check for uncommitted changes

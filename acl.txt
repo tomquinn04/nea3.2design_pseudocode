@@ -1,0 +1,22 @@
+SUBROUTINE - ACCESS CONTROL LEVELS
+
+ARGUMENTS User, OPTIONAL SearchKey
+RETURNS ACLList OR ACLValue
+
+IF NOT NULL Search DO
+    Values = SQL SELECT ACLKey, ACLValue FROM ACLList WHERE Username == User;
+    Found = False
+    FOR EACH PAIR Key, Value IN Values DO
+        IF Key == SearchKey DO
+            Found = true
+            RETURN Value
+            BREAK FOR EACH
+        END IF
+    END FOR EACH
+    IF Found == False DO
+        RETURN ERROR NotFound
+    END IF
+ELSE DO
+    Values = SQL SELECT ACLKey, ACLValue FROM ACLList WHERE Username == User;
+    RETURN Values
+END IF

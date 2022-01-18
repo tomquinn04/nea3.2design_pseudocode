@@ -1,0 +1,31 @@
+SUBROUTINE - LOGIN FORM
+
+ON CLICK BtnLogin DO
+    Found = false
+    FOR EACH PAIR Username, Password in Database.Users DO
+        IF Database Username == TxtUsername DO
+            IF Database Password == TxtPassword DO
+                Found = true
+                GLOBAL CurrentUser = Username
+                BREAK FOR EACH
+            ELSE DO
+                MESSAGEBOX Type=Error Text="Username or Password Incorrect"
+                BREAK FOR EACH
+            END IF
+        END IF
+    END FOR EACH
+    IF Found DO
+        CLOSE LoginForm
+        LOAD MainForm
+    ELSE
+        MESSAGEBOX Type=Error Text="Username or Password Incorrect"
+    END IF
+END
+
+ON CLICK BtnClose DO
+    CLOSE ALL FORMS
+END
+
+ON CLICK BtnForgotPassword DO
+    MESSAGEBOX Type=Info Text="Please contact manager to reset password"
+END
